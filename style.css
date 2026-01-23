@@ -1,0 +1,291 @@
+:root {
+    --glass-bg: rgba(255, 255, 255, 0.08);
+    /* Higher transparency */
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --glass-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.2);
+    --blur-value: 12px;
+    --font-main: 'Pretendard Variable', sans-serif;
+    --font-heading: 'Outfit', sans-serif;
+    --accent-color: #ffffff;
+    --text-primary: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.7);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+}
+
+body {
+    font-family: var(--font-main);
+    color: var(--text-primary);
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+    background: #000;
+}
+
+/* Background */
+.background-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+#bg-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.15);
+}
+
+/* Dashboard Layout */
+#dashboard {
+    height: 100vh;
+    padding: 20px 40px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* Folders Grid */
+.folders-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-auto-flow: dense;
+    gap: 24px;
+    max-width: 1700px;
+    margin: 0 auto;
+    width: 100%;
+    flex-grow: 1;
+    /* Stretch to fill space */
+    overflow-y: hidden;
+    padding: 10px;
+}
+
+/* Masonry Span Classes */
+.folder.span-h-2 {
+    grid-column: span 2;
+}
+
+.folder.span-v-2 {
+    grid-row: span 2;
+}
+
+.folder.span-v-1 {
+    grid-row: span 1;
+}
+
+/* Scrollbar styling - hidden to prevent visual artifacts */
+.folders-grid::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    display: none;
+}
+
+/* Scrollbar styling - hidden to prevent visual artifacts */
+.folders-grid::-webkit-scrollbar {
+    display: none;
+}
+
+.folders-grid {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.folder {
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--blur-value));
+    -webkit-backdrop-filter: blur(var(--blur-value));
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    /* Slightly smaller radius */
+    padding: 16px;
+    box-shadow: var(--glass-shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    opacity: 0;
+}
+
+.folder:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.45);
+}
+
+.folder-title {
+    font-family: var(--font-heading);
+    font-size: 0.95rem;
+    /* Smaller title */
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: var(--text-secondary);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.bookmark-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(55px, 1fr));
+    gap: 12px 8px;
+    /* Consistent gap between rows/cols */
+}
+
+.bookmark-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    /* Consistent gap between icon and text */
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: transform 0.2s ease;
+    margin-bottom: 4px;
+    /* Basic margin for consistency */
+}
+
+.bookmark-item:hover {
+    transform: scale(1.08);
+}
+
+.bookmark-icon {
+    width: 44px;
+    /* Slightly smaller icons */
+    height: 44px;
+    border-radius: 10px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.bookmark-icon img {
+    width: 55%;
+    height: 55%;
+    object-fit: contain;
+}
+
+.bookmark-name {
+    font-size: 0.72rem;
+    text-align: center;
+    white-space: normal;
+    /* Requested: Wrap text instead of ellipsis */
+    word-break: break-word;
+    /* Ensure it breaks correctly */
+    line-height: 1.2;
+    width: 100%;
+    opacity: 0.9;
+    max-height: 2.4em;
+    /* Limit to 2 lines for tidiness */
+    overflow: hidden;
+}
+
+/* Notepads */
+.notepads-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-top: 10px;
+    padding-bottom: 20px;
+    flex-shrink: 0;
+}
+
+.notepad-container {
+    width: 280px;
+    /* Slightly narrower */
+    background: rgba(255, 255, 255, 0.08);
+    /* More subtle */
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 16px;
+    padding: 14px;
+    box-shadow: var(--glass-shadow);
+    opacity: 0;
+}
+
+.notepad-header {
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: var(--text-secondary);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding-bottom: 6px;
+}
+
+.memo-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.memo-item {
+    padding: 6px 10px;
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 6px;
+    font-size: 13px;
+    min-height: 32px;
+    outline: none;
+    transition: background 0.2s ease;
+    white-space: nowrap;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+
+
+.memo-item:focus {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.memo-item[contenteditable="true"]:empty:before {
+    content: attr(data-placeholder);
+    color: rgba(255, 255, 255, 0.3);
+}
+
+/* Intro Animation Classes */
+.animate-in {
+    animation: windBlowing 2.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes windBlowing {
+    0% {
+        opacity: 0;
+        transform: translate(var(--start-x), var(--start-y)) rotate(var(--start-rotate)) scale(0.5);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(0, 0) rotate(0) scale(1);
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .folders-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+
+    .notepads-wrapper {
+        flex-direction: column;
+        align-items: center;
+        overflow-y: auto;
+        padding-top: 20px;
+    }
+}
