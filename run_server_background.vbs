@@ -1,6 +1,9 @@
 Set WshShell = CreateObject("WScript.Shell")
-' Get the directory where the script is located
-strScriptPath = CreateObject("Scripting.FileSystemObject").GetParentFolderName(WScript.ScriptFullName)
-' Run node server.js in that directory, hidden (0)
+Set FSO = CreateObject("Scripting.FileSystemObject")
+strScriptPath = FSO.GetParentFolderName(WScript.ScriptFullName)
+
+' Ensure current directory is correct
 WshShell.CurrentDirectory = strScriptPath
-WshShell.Run "node server.js", 0, False
+
+' Run node server.js (0 = Hidden, False = Don't wait)
+WshShell.Run "cmd /c node server.js > server.log 2> server.error.log", 0, False
