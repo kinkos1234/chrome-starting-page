@@ -1,0 +1,168 @@
+{
+    "일반": [
+        {
+            "name": "구글",
+            "url": "https://www.google.com/"
+        },
+        {
+            "name": "Youtube",
+            "url": "https://www.youtube.com/"
+        },
+        {
+            "name": "네이버",
+            "url": "https://www.naver.com/"
+        },
+        {
+            "name": "노션",
+            "url": "https://www.notion.so/"
+        },
+        {
+            "name": "깃허브",
+            "url": "https://github.com/kinkos1234/"
+        },
+        {
+            "name": "Comad.J Blog",
+            "url": "https://kinkos1234.github.io/"
+        },
+        {
+            "name": "구글 애널리틱스",
+            "url": "https://analytics.google.com/analytics/"
+        }
+    ],
+    "회사": [
+        {
+            "name": "인트라넷",
+            "url": "http://desk.samsong.co.kr/"
+        },
+        {
+            "name": "타용도",
+            "url": "http://etc.samsong.com/"
+        },
+        {
+            "name": "SAP",
+            "url": "https://service.ariba.com/Supplier.aw/109541027/aw?awh=r&awssk=r525oqa5"
+        },
+        {
+            "name": "Covisint",
+            "url": "https://support.portal.covisint.com/web/portal/home"
+        }
+    ],
+    "자동차 자료 조사": [
+        {
+            "name": "Global Auto News",
+            "url": "http://www.global-autonews.com/home.php"
+        },
+        {
+            "name": "MARKLINES",
+            "url": "https://www.marklines.com/en/global/top"
+        },
+        {
+            "name": "Focus 2 Move",
+            "url": "https://www.focus2move.com/category/market-researches/"
+        },
+        {
+            "name": "OICA",
+            "url": "https://oica.net/production-statistics/"
+        }
+    ],
+    "취미": [
+        {
+            "name": "Soop",
+            "url": "https://my.afreecatv.com/favorite"
+        },
+        {
+            "name": "Soop_Dev",
+            "url": "https://developers.sooplive.co.kr"
+        },
+        {
+            "name": "FMK",
+            "url": "https://www.fmkorea.com/starcraft"
+        },
+        {
+            "name": "ONE K",
+            "url": "https://kuniv.kr/"
+        },
+        {
+            "name": "ELO Board",
+            "url": "https://www.eloboard.com/women/bbs/board.php?bo_table=rank_list"
+        }
+    ],
+    "디자인": [
+        {
+            "name": "CFC",
+            "url": "https://contentformcontext.com/"
+        },
+        {
+            "name": "Plus-Ex",
+            "url": "https://www.plus-ex.com/experience"
+        },
+        {
+            "name": "Saworl",
+            "url": "https://saworl.com/new/?page_id=2587"
+        },
+        {
+            "name": "BRENDEN",
+            "url": "https://brenden.kr/project"
+        }
+    ],
+    "AI": [
+        {
+            "name": "ChatGPT",
+            "url": "https://chatgpt.com/"
+        },
+        {
+            "name": "GEMINI",
+            "url": "https://gemini.google.com/app"
+        },
+        {
+            "name": "Claude",
+            "url": "https://claude.ai/new"
+        },
+        {
+            "name": "LibreChat",
+            "url": "https://kdt-librechat.goorm.io/c/new"
+        },
+        {
+            "name": "SUNO",
+            "url": "https://suno.com/"
+        },
+        {
+            "name": "NotebookLM",
+            "url": "https://notebooklm.google.com/"
+        }
+    ],
+    "부트캠프": [
+        {
+            "name": "EXP",
+            "url": "https://exp.goorm.io/education/org_TcbkQFviBcogT1joUp/dashboard"
+        },
+        {
+            "name": "ZOOM",
+            "url": "https://zoom.us/j/95793759086?pwd=IB6RiRQEAUyEgsQM8kvoba50ArbOGj.1#success"
+        },
+        {
+            "name": "LMS",
+            "url": "https://k-digital.goorm.io/learn/my"
+        },
+        {
+            "name": "Notion_10",
+            "url": "https://www.notion.so/goormkdx/10-2bdc0ff4ce3180c19cbae5dd5c63560f"
+        },
+        {
+            "name": "Notion_Log",
+            "url": "https://www.notion.so/goormkdx/2d9c0ff4ce318113bf43d1387341f10d"
+        },
+        {
+            "name": "Notion_Team",
+            "url": "https://www.notion.so/goormkdx/2-2dac0ff4ce3180f08183d90a81c43587"
+        },
+        {
+            "name": "Notion_Facilitator",
+            "url": "https://tristankim.notion.site/9oormthon-10th"
+        },
+        {
+            "name": "Khan",
+            "url": "https://ko.khanacademy.org/"
+        }
+    ]
+}

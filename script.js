@@ -1,111 +1,173 @@
-const bookmarkData = {
-    "일반": [
-        { name: "구글", url: "https://www.google.com/" },
-        { name: "네이버", url: "https://www.naver.com/" },
-        { name: "노션", url: "https://www.notion.so/" },
-        { name: "깃허브", url: "https://github.com/kinkos1234/" },
-        { name: "Comad.J Blog", url: "https://kinkos1234.github.io/" },
-        { name: "구글 애널리틱스", url: "https://analytics.google.com/analytics/" }
-    ],
-    "회사": [
-        { name: "인트라넷", url: "http://desk.samsong.co.kr/" },
-        { name: "타용도", url: "http://etc.samsong.com/" },
-        { name: "SAP", url: "https://service.ariba.com/Supplier.aw/109541027/aw?awh=r&awssk=r525oqa5" },
-        { name: "Covisint", url: "https://support.portal.covisint.com/web/portal/home" }
-    ],
-    "자동차 자료 조사": [
-        { name: "Global Auto News", url: "http://www.global-autonews.com/home.php" },
-        { name: "MARKLINES", url: "https://www.marklines.com/en/global/top" },
-        { name: "Focus 2 Move", url: "https://www.focus2move.com/category/market-researches/" },
-        { name: "OICA", url: "https://oica.net/production-statistics/" }
-    ],
-    "취미": [
-        { name: "Soop", url: "https://my.afreecatv.com/favorite" },
-        { name: "Soop_Dev", url: "https://developers.sooplive.co.kr" },
-        { name: "FMK", url: "https://www.fmkorea.com/starcraft" },
-        { name: "ONE K", url: "https://kuniv.kr/" },
-        { name: "ELO Board", url: "https://www.eloboard.com/women/bbs/board.php?bo_table=rank_list" }
-    ],
-    "디자인": [
-        { name: "CFC", url: "https://contentformcontext.com/" },
-        { name: "Plus-Ex", url: "https://www.plus-ex.com/experience" },
-        { name: "Saworl", url: "https://saworl.com/new/?page_id=2587" },
-        { name: "BRENDEN", url: "https://brenden.kr/project" }
-    ],
-    "AI": [
-        { name: "ChatGPT", url: "https://chatgpt.com/" },
-        { name: "Claude", url: "https://claude.ai/new" },
-        { name: "LibreChat", url: "https://kdt-librechat.goorm.io/c/new" },
-        { name: "SUNO", url: "https://suno.com/" },
-        { name: "NotebookLM", url: "https://notebooklm.google.com/" }
-    ],
-    "부트캠프": [
-        { name: "ZOOM", url: "https://zoom.us/j/95793759086?pwd=IB6RiRQEAUyEgsQM8kvoba50ArbOGj.1#success" },
-        { name: "LMS", url: "https://k-digital.goorm.io/learn/lecture/62007" },
-        { name: "Notion_10", url: "https://www.notion.so/goormkdx/10-2bdc0ff4ce3180c19cbae5dd5c63560f" },
-        { name: "Notion_Log", url: "https://www.notion.so/goormkdx/2d9c0ff4ce318113bf43d1387341f10d" },
-        { name: "Notion_Team", url: "https://www.notion.so/goormkdx/2-2dac0ff4ce3180f08183d90a81c43587" },
-        { name: "Notion_Facilitator", url: "https://tristankim.notion.site/9oormthon-10th" },
-        { name: "Khan", url: "https://ko.khanacademy.org/" }
-    ]
+// script.js - Premium Crystal Office v1.3 (Split Grid: 3-Col Top / 4-Col Bottom)
+
+const forcedGlassBoxes = ["타용도", "Global Auto News", "ELO Board"];
+
+// Custom Icon Mappings
+const customIcons = {
+    "Comad.J Blog": "assets/comad_j_blog_icon.png",
+    "구글 애널리틱스": "assets/google_analytics_icon.png",
+    "ChatGPT": "assets/chatgpt_icon.png",
+    "LibreChat": "assets/librechat_icon.png",
+    "Saworl": "assets/saworl_icon.png",
+    "NotebookLM": "assets/notebooklm_icon.png",
+    "EXP": "https://www.google.com/s2/favicons?sz=64&domain=k-digital.goorm.io",
+    "Notion_Facilitator": "https://www.google.com/s2/favicons?sz=64&domain=www.notion.so"
 };
 
-const forcedGlassBoxes = ["타용도", "Global Auto News", "ELO Board", "Saworl", "ChatGPT", "LibreChat", "Notion_Facilitator", "Comad.J Blog"];
+let currentEngine = 'google';
 
 document.addEventListener('DOMContentLoaded', () => {
+    initClock();
+    initSearch();
     initDashboard();
 });
 
-function initDashboard() {
-    const container = document.getElementById('folders-container');
-    const notepadElements = document.querySelectorAll('.notepad-container');
+/* --- Clock Logic --- */
+function initClock() {
+    updateClocks();
+    setInterval(updateClocks, 1000);
+}
 
-    // 1. Generate Bookmark Folders
-    Object.entries(bookmarkData).forEach(([category, items], index) => {
-        const folder = createFolderElement(category, items, index);
-        container.appendChild(folder);
+function updateClocks() {
+    const zones = {
+        'time-kr': 'Asia/Seoul',
+        'time-us': 'America/Detroit',
+        'time-de': 'Europe/Berlin',
+        'time-in': 'Asia/Kolkata'
+    };
 
-        // Apply intro animation with delay
-        setTimeout(() => {
-            applyWindAnimation(folder);
-        }, index * 100);
+    for (const [id, zone] of Object.entries(zones)) {
+        const el = document.getElementById(id);
+        if (el) {
+            el.textContent = new Date().toLocaleTimeString('en-GB', { timeZone: zone });
+        }
+    }
+}
+
+/* --- Search Logic --- */
+function initSearch() {
+    const toggleBtn = document.getElementById('search-toggle');
+    const searchIcon = document.getElementById('search-icon');
+    const searchInput = document.getElementById('search-input');
+
+    toggleBtn.addEventListener('click', () => {
+        if (currentEngine === 'google') {
+            currentEngine = 'naver';
+            searchIcon.src = 'https://www.naver.com/favicon.ico';
+            searchInput.placeholder = 'Naver Search...';
+        } else {
+            currentEngine = 'google';
+            searchIcon.src = 'https://www.google.com/favicon.ico';
+            searchInput.placeholder = 'Google Search...';
+        }
+        searchInput.focus();
     });
 
-    // 2. Animate Notepads
-    notepadElements.forEach((notepad, index) => {
-        setTimeout(() => {
-            applyWindAnimation(notepad);
-        }, (Object.keys(bookmarkData).length + index) * 100);
+    searchInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            const query = searchInput.value.trim();
+            if (query) {
+                let url = currentEngine === 'google'
+                    ? `https://www.google.com/search?q=${encodeURIComponent(query)}`
+                    : `https://search.naver.com/search.naver?query=${encodeURIComponent(query)}`;
+                window.location.href = url;
+            }
+        }
     });
+}
 
-    // 3. Setup Notepad Logic
-    setupNotepads();
+/* --- Dashboard Logic --- */
+async function initDashboard() {
+    const gridContainer = document.getElementById('masonry-grid');
+    gridContainer.innerHTML = '';
+
+    // Create Sections
+    const topSection = document.createElement('div');
+    topSection.className = 'grid-section-top';
+    gridContainer.appendChild(topSection);
+
+    const bottomSection = document.createElement('div');
+    bottomSection.className = 'grid-section-bottom';
+    gridContainer.appendChild(bottomSection);
+
+    try {
+        const [bookmarksRes, notesRes] = await Promise.all([
+            fetch('/api/bookmarks'),
+            fetch('/api/notes')
+        ]);
+
+        if (!bookmarksRes.ok) throw new Error('Failed to fetch bookmarks');
+
+        const bookmarkData = await bookmarksRes.json();
+        const noteData = notesRes.ok ? await notesRes.json() : { notes: ["", "", ""] };
+        const savedNotes = noteData.notes || ["", "", ""];
+
+        // Defined Order Lists
+        const orderedTop = ["일반", "회사", "자동차 자료 조사", "취미", "디자인", "AI"];
+        const orderedBottom = ["부트캠프"]; // And then Notes
+
+        // 1. Render Top Section (3 Cols)
+        orderedTop.forEach((category, i) => {
+            const items = bookmarkData[category];
+            if (items) {
+                const folder = createFolderElement(category, items, i);
+                folder.style.animationDelay = `${i * 50}ms`;
+                topSection.appendChild(folder);
+            }
+        });
+
+        // 2. Render Bottom Section (4 Cols, Tall)
+        orderedBottom.forEach((category, i) => {
+            const items = bookmarkData[category];
+            if (items) {
+                const folder = createFolderElement(category, items, i);
+                folder.classList.add('card-tall'); // Double Height
+                folder.style.animationDelay = `${(orderedTop.length + i) * 50}ms`;
+                bottomSection.appendChild(folder);
+            }
+        });
+
+        // 3. Render Notepads (Strictly 3 -> Bottom Section)
+        const notesToDisplay = savedNotes.slice(0, 3);
+        while (notesToDisplay.length < 3) notesToDisplay.push("");
+
+        notesToDisplay.forEach((noteContent, index) => {
+            const notepad = createNotepadElement(index + 1, noteContent);
+            notepad.classList.add('card-tall'); // Double Height
+            notepad.style.animationDelay = `${(orderedTop.length + orderedBottom.length + index) * 50}ms`;
+            bottomSection.appendChild(notepad);
+        });
+
+        setupNotepads();
+
+        setTimeout(() => {
+            const cards = document.querySelectorAll('.card-common');
+            cards.forEach(card => card.classList.add('animate-rise'));
+        }, 50);
+
+    } catch (error) {
+        console.error('Error loading dashboard:', error);
+        gridContainer.innerHTML = `<div style="color:white; padding:20px;">Failed to load data.</div>`;
+    }
 }
 
 function createFolderElement(category, items, index) {
     const folder = document.createElement('div');
-    folder.className = 'folder';
-
-    // Fixed aesthetic mapping for consistent layout
-    const layoutMapping = {
-        "일반": "span-h-2",
-        "회사": "span-v-1",
-        "자동차 자료 조사": "span-v-2",
-        "취미": "span-v-1",
-        "디자인": "span-v-2",
-        "AI": "span-h-2",
-        "부트캠프": "span-v-1"
-    };
-    const sizeClass = layoutMapping[category] || "span-v-1";
-    folder.classList.add(sizeClass);
+    folder.className = 'card-common folder';
 
     const title = document.createElement('div');
-    title.className = 'folder-title';
+    title.className = 'card-title';
     title.textContent = category;
     folder.appendChild(title);
 
     const list = document.createElement('div');
     list.className = 'bookmark-list';
+
+    // Unified Layout Logic
+    list.classList.add('grid-dense');
+
+    // Remove Overrides for Bootcamp/Company in Terms of Grid Size if Uniformity is desired for buttons
+    // But keeps buttons uniform size (64px)
 
     items.forEach(item => {
         const link = document.createElement('a');
@@ -118,17 +180,25 @@ function createFolderElement(category, items, index) {
         iconContainer.className = 'bookmark-icon';
 
         const isForcedGlass = forcedGlassBoxes.includes(item.name);
+        const customIconPath = customIcons[item.name];
 
-        if (isForcedGlass) {
+        if (customIconPath) {
+            const img = document.createElement('img');
+            img.src = customIconPath;
+            img.onerror = () => setupGlassBox(iconContainer, item.name);
+            iconContainer.appendChild(img);
+        } else if (isForcedGlass) {
             setupGlassBox(iconContainer, item.name);
         } else {
             const img = document.createElement('img');
-            const domain = new URL(item.url).hostname;
-            img.src = `https://www.google.com/s2/favicons?sz=64&domain=${domain}`;
-            img.onerror = () => {
+            try {
+                const domain = new URL(item.url).hostname;
+                img.src = `https://www.google.com/s2/favicons?sz=64&domain=${domain}`;
+                img.onerror = () => setupGlassBox(iconContainer, item.name);
+                iconContainer.appendChild(img);
+            } catch (e) {
                 setupGlassBox(iconContainer, item.name);
-            };
-            iconContainer.appendChild(img);
+            }
         }
 
         const name = document.createElement('span');
@@ -144,50 +214,84 @@ function createFolderElement(category, items, index) {
     return folder;
 }
 
+function createNotepadElement(id, content) {
+    const notepad = document.createElement('div');
+    notepad.className = 'card-common notepad-card';
+    notepad.id = `notepad-${id}`;
+
+    const title = document.createElement('div');
+    title.className = 'card-title';
+    title.textContent = `Notepad ${id}`;
+    notepad.appendChild(title);
+
+    const list = document.createElement('div');
+    list.className = 'memo-list';
+
+    // Because it's a Tall card, we can show more lines!
+    // Adjusted to 6 lines (180px height)
+    for (let i = 0; i < 6; i++) {
+        const line = document.createElement('div');
+        line.className = 'memo-item';
+        line.contentEditable = true;
+        line.dataset.placeholder = "Type here...";
+        list.appendChild(line);
+    }
+
+    notepad.appendChild(list);
+    return notepad;
+}
+
 function setupGlassBox(container, name) {
-    const colors = [
-        'rgba(255, 255, 255, 0.25)',
-        'rgba(200, 230, 255, 0.25)',
-        'rgba(255, 220, 230, 0.25)',
-        'rgba(230, 255, 220, 0.25)',
-        'rgba(240, 220, 255, 0.25)'
-    ];
-    container.style.background = colors[Math.floor(Math.random() * colors.length)];
-    container.innerHTML = `<span style="font-weight: 600; font-size: 0.9rem; opacity: 0.8;">${name.charAt(0)}</span>`;
+    container.style.background = 'rgba(255, 255, 255, 0.1)';
+    container.style.backdropFilter = 'blur(4px)';
+    container.innerHTML = `<span style="font-weight: 600; font-size: 1.2rem; opacity: 0.8; color: white;">${name.charAt(0)}</span>`;
 }
 
-
-function applyWindAnimation(element) {
-    // Random start positions for "blown by wind" effect
-    const startX = (Math.random() * 1000 - 500) + 'px';
-    const startY = (Math.random() * 1000 - 500) + 'px';
-    const startRotate = (Math.random() * 720 - 360) + 'deg';
-
-    element.style.setProperty('--start-x', startX);
-    element.style.setProperty('--start-y', startY);
-    element.style.setProperty('--start-rotate', startRotate);
-
-    element.classList.add('animate-in');
-}
-
-function setupNotepads() {
+async function setupNotepads() {
     const memos = document.querySelectorAll('.memo-item');
+    try {
+        const res = await fetch('/api/notes');
+        if (res.ok) {
+            const data = await res.json();
+            const notes = data.notes || [];
+
+            // Note logic update: if we have more lines (rows) visually but same data structure (array of strings)
+            // Ideally we map each "notepad" to a chunk of text.
+            // But current persistence is simple array of lines? 
+            // Previous logic: savedNotes = ["line1", "line2"...] flattened?
+            // Actually previous logic seemed to map all .memo-item globally to an array index.
+            // If we increase lines, we just use more array slots. 
+            // Persistence should handle it automatically if it just saves explicit array indices.
+
+            memos.forEach((memo, index) => {
+                if (notes[index]) {
+                    memo.textContent = notes[index];
+                    resizeMemoFont(memo);
+                }
+            });
+        }
+    } catch (e) {
+        console.error("Failed to load notes", e);
+    }
+
+    let timeout;
+    const saveNotes = () => {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => {
+            const allNotes = Array.from(memos).map(m => m.textContent);
+            fetch('/api/notes', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ notes: allNotes })
+            }).catch(e => console.error("Save failed", e));
+        }, 800);
+    };
 
     memos.forEach(memo => {
-        // Load saved state
-        const savedText = localStorage.getItem(`memo-${Array.from(memos).indexOf(memo)}`);
-        if (savedText) {
-            memo.textContent = savedText;
-            resizeMemoFont(memo);
-        }
-
         memo.addEventListener('input', () => {
             resizeMemoFont(memo);
-            // Save state
-            localStorage.setItem(`memo-${Array.from(memos).indexOf(memo)}`, memo.textContent);
+            saveNotes();
         });
-
-        // Prevention of newline if we want to keep it strictly one line until max wrap
         memo.addEventListener('keydown', (e) => {
             if (e.key === 'Enter') {
                 e.preventDefault();
@@ -197,20 +301,15 @@ function setupNotepads() {
 }
 
 function resizeMemoFont(memo) {
-    const minFontSize = 10;
-    const maxFontSize = 14;
+    const minFontSize = 11;
+    const maxFontSize = 13;
     let currentFontSize = maxFontSize;
-
     memo.style.fontSize = `${currentFontSize}px`;
     memo.style.whiteSpace = 'nowrap';
-
-    // While the text overflows and font size is above minimum
     while (memo.scrollWidth > memo.clientWidth && currentFontSize > minFontSize) {
         currentFontSize -= 0.5;
         memo.style.fontSize = `${currentFontSize}px`;
     }
-
-    // If it still overflows after reaching minFontSize, enable wrapping
     if (memo.scrollWidth > memo.clientWidth) {
         memo.style.whiteSpace = 'normal';
         memo.style.wordBreak = 'break-word';

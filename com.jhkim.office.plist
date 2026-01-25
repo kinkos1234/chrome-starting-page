@@ -7,17 +7,17 @@
     <key>ProgramArguments</key>
     <array>
         <string>/Users/jhkim/.nvm/versions/node/v24.13.0/bin/node</string>
-        <string>/Users/jhkim/Programmer/kinkos1234-github-blog/starting_page/server.js</string>
+        <string>/Users/jhkim/Programmer/kinkos1234-github-blog/chrome-starting-page/server.js</string>
     </array>
     <key>WorkingDirectory</key>
-    <string>/Users/jhkim/Programmer/kinkos1234-github-blog/starting_page</string>
+    <string>/Users/jhkim/Programmer/kinkos1234-github-blog/chrome-starting-page</string>
     <key>RunAtLoad</key>
     <true/>
     <key>KeepAlive</key>
     <true/>
     <key>StandardOutPath</key>
-    <string>/Users/jhkim/Programmer/kinkos1234-github-blog/starting_page/server.log</string>
+    <string>/Users/jhkim/Programmer/kinkos1234-github-blog/chrome-starting-page/server.log</string>
     <key>StandardErrorPath</key>
-    <string>/Users/jhkim/Programmer/kinkos1234-github-blog/starting_page/server.error.log</string>
+    <string>/Users/jhkim/Programmer/kinkos1234-github-blog/chrome-starting-page/server.error.log</string>
 </dict>
 </plist>

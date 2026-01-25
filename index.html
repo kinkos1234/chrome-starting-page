@@ -20,47 +20,38 @@
     </div>
 
     <main id="dashboard">
-        <!-- Folders will be injected here -->
-        <div id="folders-container" class="folders-grid"></div>
+        <!-- Hero Section: Clocks & Search -->
+        <div class="hero-container">
+            <div class="clock-container">
+                <div class="clock-item">
+                    <span class="clock-label">SEOUL</span>
+                    <span class="clock-time" id="time-kr">--:--</span>
+                </div>
+                <div class="clock-item">
+                    <span class="clock-label">DETROIT</span>
+                    <span class="clock-time" id="time-us">--:--</span>
+                </div>
+                <div class="clock-item">
+                    <span class="clock-label">BERLIN</span>
+                    <span class="clock-time" id="time-de">--:--</span>
+                </div>
+                <div class="clock-item">
+                    <span class="clock-label">CHENNAI</span>
+                    <span class="clock-time" id="time-in">--:--</span>
+                </div>
+            </div>
 
-        <!-- Notepads at the bottom center -->
-        <div class="notepads-wrapper">
-            <div class="notepad-container" id="notepad-1">
-                <div class="notepad-header">
-                    <span>Notepad 1</span>
-                </div>
-                <div class="memo-list">
-                    <div class="memo-item" contenteditable="true" data-placeholder="Write a memo..."></div>
-                    <div class="memo-item" contenteditable="true" data-placeholder="Write a memo..."></div>
-                    <div class="memo-item" contenteditable="true" data-placeholder="Write a memo..."></div>
-                    <div class="memo-item" contenteditable="true" data-placeholder="Write a memo..."></div>
-                    <div class="memo-item" contenteditable="true" data-placeholder="Write a memo..."></div>
-                </div>
+            <div class="search-container">
+                <button id="search-toggle" class="search-btn" title="Switch Engine">
+                    <img src="https://www.google.com/favicon.ico" id="search-icon" alt="Engine">
+                </button>
+                <input type="text" id="search-input" placeholder="Search Google..." autocomplete="off">
             </div>
-            <div class="notepad-container" id="notepad-2">
-                <div class="notepad-header">
-                    <span>Notepad 2</span>
-                </div>
-                <div class="memo-list">
-                    <div class="memo-item" contenteditable="true" data-placeholder="Write a memo..."></div>
-                    <div class="memo-item" contenteditable="true" data-placeholder="Write a memo..."></div>
-                    <div class="memo-item" contenteditable="true" data-placeholder="Write a memo..."></div>
-                    <div class="memo-item" contenteditable="true" data-placeholder="Write a memo..."></div>
-                    <div class="memo-item" contenteditable="true" data-placeholder="Write a memo..."></div>
-                </div>
-            </div>
-            <div class="notepad-container" id="notepad-3">
-                <div class="notepad-header">
-                    <span>Notepad 3</span>
-                </div>
-                <div class="memo-list">
-                    <div class="memo-item" contenteditable="true" data-placeholder="Write a memo..."></div>
-                    <div class="memo-item" contenteditable="true" data-placeholder="Write a memo..."></div>
-                    <div class="memo-item" contenteditable="true" data-placeholder="Write a memo..."></div>
-                    <div class="memo-item" contenteditable="true" data-placeholder="Write a memo..."></div>
-                    <div class="memo-item" contenteditable="true" data-placeholder="Write a memo..."></div>
-                </div>
-            </div>
+        </div>
+
+        <!-- Masonry Grid Container -->
+        <div id="masonry-grid" class="folders-grid">
+            <!-- Columns injected by JS -->
         </div>
     </main>
 

@@ -1,4 +1,4 @@
-[ JH Kim's Office - 시작 가이드 ]
+https://kinkos1234.github.io/gen_ai/antigravity-skills-workflow/[ JH Kim's Office - 시작 가이드 ]
 
 본 대시보드는 macOS와 Windows 모두에서 완벽하게 작동하며, 폴더 위치를 옮겨도 간편하게 재설정할 수 있도록 설계되었습니다.
 

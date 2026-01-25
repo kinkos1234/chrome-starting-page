@@ -16,6 +16,80 @@ const MIME_TYPES = {
 };
 
 const server = http.createServer((req, res) => {
+    // API: Bookmarks
+    if (req.url === '/api/bookmarks' && req.method === 'GET') {
+        const bookmarksPath = path.join(__dirname, 'data', 'bookmarks.json');
+        fs.readFile(bookmarksPath, 'utf8', (err, data) => {
+            if (err) {
+                console.error('Error reading bookmarks:', err);
+                res.writeHead(500, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({ error: 'Failed to read bookmarks' }));
+            } else {
+                res.writeHead(200, { 'Content-Type': 'application/json' });
+                res.end(data);
+            }
+        });
+        return;
+    }
+
+    // API: Notes
+    if (req.url === '/api/notes') {
+        const notesPath = path.join(__dirname, 'data', 'notes.json');
+
+        if (req.method === 'GET') {
+            fs.readFile(notesPath, 'utf8', (err, data) => {
+                if (err) {
+                    if (err.code === 'ENOENT') {
+                        // Return default empty notes if file missing
+                        res.writeHead(200, { 'Content-Type': 'application/json' });
+                        res.end(JSON.stringify({ notes: ["", "", ""] })); 
+                    } else {
+                        console.error('Error reading notes:', err);
+                        res.writeHead(500, { 'Content-Type': 'application/json' });
+                        res.end(JSON.stringify({ error: 'Failed to read notes' }));
+                    }
+                } else {
+                    res.writeHead(200, { 'Content-Type': 'application/json' });
+                    res.end(data);
+                }
+            });
+            return;
+        }
+
+        if (req.method === 'POST') {
+            let body = '';
+            req.on('data', chunk => {
+                body += chunk.toString();
+            });
+            req.on('end', () => {
+                try {
+                    // Start validation
+                    const parsed = JSON.parse(body);
+                    if (!parsed || !Array.isArray(parsed.notes)) {
+                         throw new Error('Invalid data format');
+                    }
+                    
+                    fs.writeFile(notesPath, JSON.stringify(parsed, null, 2), (err) => {
+                        if (err) {
+                            console.error('Error saving notes:', err);
+                            res.writeHead(500, { 'Content-Type': 'application/json' });
+                            res.end(JSON.stringify({ error: 'Failed to save notes' }));
+                        } else {
+                            res.writeHead(200, { 'Content-Type': 'application/json' });
+                            res.end(JSON.stringify({ success: true }));
+                        }
+                    });
+                } catch (e) {
+                    console.error('Invalid JSON posted:', e);
+                    res.writeHead(400, { 'Content-Type': 'application/json' });
+                    res.end(JSON.stringify({ error: 'Invalid JSON' }));
+                }
+            });
+            return;
+        }
+    }
+
+    // Static File Serving
     let filePath = '.' + req.url;
     if (filePath === './') {
         filePath = './index.html';
