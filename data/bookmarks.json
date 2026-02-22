@@ -39,7 +39,7 @@
             "zone": "America/Mexico_City"
         }
     ],
-    "_bgUrl": "https://image.tving.com/upload/cms/caim/CAIM0400/M000370808.jpg/dims/resize/1280",
+    "_bgUrl": "https://image.tving.com/upload/cms/caim/CAIM0400/M000370808.jpg",
     "일반": [
         {
             "name": "Youtube",
@@ -174,7 +174,7 @@
         {
             "name": "ChatGPT",
             "url": "https://chatgpt.com/",
-            "iconUrl": "https://www.google.com/s2/favicons?sz=64&domain=chatgpt.com"
+            "iconUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/ChatGPT-Logo.svg/960px-ChatGPT-Logo.svg.png"
         },
         {
             "name": "GEMINI",
@@ -189,7 +189,7 @@
         {
             "name": "LibreChat",
             "url": "https://kdt-librechat.goorm.io/c/new",
-            "iconUrl": "https://www.google.com/s2/favicons?sz=64&domain=kdt-librechat.goorm.io"
+            "iconUrl": "https://avatars.githubusercontent.com/u/169401942?s=200&v=4"
         },
         {
             "name": "SUNO",
