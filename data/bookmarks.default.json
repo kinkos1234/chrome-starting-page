@@ -1,0 +1,131 @@
+{
+    "_layout": {
+        "top": [
+            "Search Engines",
+            "Social Media",
+            "News",
+            "Entertainment",
+            "Design Tools",
+            "Development"
+        ],
+        "bottom": [
+            "Productivity"
+        ]
+    },
+    "_visibility": {
+        "Search Engines": true,
+        "Social Media": true,
+        "News": true,
+        "Entertainment": true,
+        "Design Tools": true,
+        "Development": true,
+        "Productivity": true
+    },
+    "_clocks": [
+        {
+            "name": "NEW YORK",
+            "zone": "America/New_York"
+        },
+        {
+            "name": "LONDON",
+            "zone": "Europe/London"
+        },
+        {
+            "name": "TOKYO",
+            "zone": "Asia/Tokyo"
+        },
+        {
+            "name": "SYDNEY",
+            "zone": "Australia/Sydney"
+        }
+    ],
+    "Search Engines": [
+        {
+            "name": "Google",
+            "url": "https://www.google.com/",
+            "iconUrl": "https://www.google.com/s2/favicons?sz=64&domain=www.google.com"
+        },
+        {
+            "name": "Bing",
+            "url": "https://www.bing.com/",
+            "iconUrl": "https://www.google.com/s2/favicons?sz=64&domain=www.bing.com"
+        }
+    ],
+    "Social Media": [
+        {
+            "name": "Twitter",
+            "url": "https://twitter.com/",
+            "iconUrl": "https://www.google.com/s2/favicons?sz=64&domain=twitter.com"
+        },
+        {
+            "name": "Instagram",
+            "url": "https://www.instagram.com/",
+            "iconUrl": "https://www.google.com/s2/favicons?sz=64&domain=www.instagram.com"
+        }
+    ],
+    "News": [
+        {
+            "name": "BBC News",
+            "url": "https://www.bbc.com/news",
+            "iconUrl": "https://www.google.com/s2/favicons?sz=64&domain=www.bbc.com"
+        },
+        {
+            "name": "TechCrunch",
+            "url": "https://techcrunch.com/",
+            "iconUrl": "https://www.google.com/s2/favicons?sz=64&domain=techcrunch.com"
+        }
+    ],
+    "Entertainment": [
+        {
+            "name": "Youtube",
+            "url": "https://www.youtube.com/",
+            "iconUrl": "https://www.google.com/s2/favicons?sz=64&domain=www.youtube.com"
+        },
+        {
+            "name": "Netflix",
+            "url": "https://www.netflix.com/",
+            "iconUrl": "https://www.google.com/s2/favicons?sz=64&domain=www.netflix.com"
+        }
+    ],
+    "Design Tools": [
+        {
+            "name": "Figma",
+            "url": "https://www.figma.com/",
+            "iconUrl": "https://www.google.com/s2/favicons?sz=64&domain=www.figma.com"
+        },
+        {
+            "name": "Dribbble",
+            "url": "https://dribbble.com/",
+            "iconUrl": "https://www.google.com/s2/favicons?sz=64&domain=dribbble.com"
+        }
+    ],
+    "Development": [
+        {
+            "name": "GitHub",
+            "url": "https://github.com/",
+            "iconUrl": "https://www.google.com/s2/favicons?sz=64&domain=github.com"
+        },
+        {
+            "name": "StackOverflow",
+            "url": "https://stackoverflow.com/",
+            "iconUrl": "https://www.google.com/s2/favicons?sz=64&domain=stackoverflow.com"
+        },
+        {
+            "name": "ChatGPT",
+            "url": "https://chatgpt.com/",
+            "iconUrl": "https://www.google.com/s2/favicons?sz=64&domain=chatgpt.com"
+        }
+    ],
+    "Productivity": [
+        {
+            "name": "Notion",
+            "url": "https://www.notion.so/",
+            "iconUrl": "https://www.google.com/s2/favicons?sz=64&domain=www.notion.so"
+        },
+        {
+            "name": "Slack",
+            "url": "https://slack.com/",
+            "iconUrl": "https://www.google.com/s2/favicons?sz=64&domain=slack.com"
+        }
+    ]
+}

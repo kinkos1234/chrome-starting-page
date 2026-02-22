@@ -56,3 +56,6 @@ launchctl load "$PLIST_DEST"
 
 echo "Success! The server is now running in the background."
 echo "You can access your dashboard at http://localhost:1111"
+
+# Clean up local temporary plist 
+rm "$PLIST_NAME"

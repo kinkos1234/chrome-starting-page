@@ -1,61 +1,146 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>JH Kim's Office</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-        href="https://fonts.googleapis.com/css2?family=Pretendard+Variable:wght@100..900&family=Outfit:wght@100..900&display=swap"
-        rel="stylesheet">
-</head>
+      href="https://fonts.googleapis.com/css2?family=Pretendard+Variable:wght@100..900&family=Outfit:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
 
-<body>
+  <body>
     <div class="background-container">
-        <img src="assets/background.png" alt="Background" id="bg-image">
-        <div class="overlay"></div>
+      <img id="bg-image" style="display: none;" alt="Background" />
+      <div class="overlay"></div>
+    </div>
+
+    <!-- Settings Gear Button -->
+    <button id="settings-btn" class="settings-btn" title="Settings">
+      <svg
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <circle cx="12" cy="12" r="3" />
+        <path
+          d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65
+                1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0
+                9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0
+                0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65
+                1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9
+                4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65
+                0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65
+                1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"
+        />
+      </svg>
+    </button>
+
+    <!-- Settings Modal -->
+    <div id="settings-overlay" class="settings-overlay hidden">
+      <div class="settings-modal">
+        <div class="settings-header">
+          <h2>Bookmark Settings</h2>
+          <button id="settings-close" class="settings-close">&times;</button>
+        </div>
+        <div class="settings-body" id="settings-body">
+          <!-- Populated dynamically by script.js -->
+        </div>
+        <div class="settings-footer">
+          <button
+            id="settings-cancel"
+            class="settings-btn-action settings-btn-cancel"
+          >
+            Cancel
+          </button>
+          <button
+            id="settings-save"
+            class="settings-btn-action settings-btn-save"
+          >
+            Save
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Todos Modal -->
+    <div id="todos-overlay" class="settings-overlay hidden">
+      <div class="settings-modal todos-modal-narrow">
+        <div class="settings-header">
+          <h2 id="todos-date-title">Tasks</h2>
+          <button id="todos-close" class="settings-close">&times;</button>
+        </div>
+        <div class="settings-body" id="todos-body">
+          <!-- Javascript will inject 5 todo items here -->
+        </div>
+        <div class="settings-footer">
+          <button
+            id="todos-cancel"
+            class="settings-btn-action settings-btn-cancel"
+          >
+            Cancel
+          </button>
+          <button id="todos-save" class="settings-btn-action settings-btn-save">
+            Save
+          </button>
+        </div>
+      </div>
     </div>
 
     <main id="dashboard">
-        <!-- Hero Section: Clocks & Search -->
-        <div class="hero-container">
-            <div class="clock-container">
-                <div class="clock-item">
-                    <span class="clock-label">SEOUL</span>
-                    <span class="clock-time" id="time-kr">--:--</span>
-                </div>
-                <div class="clock-item">
-                    <span class="clock-label">DETROIT</span>
-                    <span class="clock-time" id="time-us">--:--</span>
-                </div>
-                <div class="clock-item">
-                    <span class="clock-label">BERLIN</span>
-                    <span class="clock-time" id="time-de">--:--</span>
-                </div>
-                <div class="clock-item">
-                    <span class="clock-label">CHENNAI</span>
-                    <span class="clock-time" id="time-in">--:--</span>
-                </div>
-            </div>
-
-            <div class="search-container">
-                <button id="search-toggle" class="search-btn" title="Switch Engine">
-                    <img src="https://www.google.com/favicon.ico" id="search-icon" alt="Engine">
-                </button>
-                <input type="text" id="search-input" placeholder="Search Google..." autocomplete="off">
-            </div>
+      <!-- Hero Section: Clocks & Search -->
+      <div class="hero-container">
+        <div class="clock-container">
+          <div class="clock-item">
+            <span class="clock-label">SEOUL</span>
+            <span class="clock-time" id="time-kr">--:--</span>
+          </div>
+          <div class="clock-item">
+            <span class="clock-label">DETROIT</span>
+            <span class="clock-time" id="time-us">--:--</span>
+          </div>
+          <div class="clock-item">
+            <span class="clock-label">BERLIN</span>
+            <span class="clock-time" id="time-de">--:--</span>
+          </div>
+          <div class="clock-item">
+            <span class="clock-label">CHENNAI</span>
+            <span class="clock-time" id="time-in">--:--</span>
+          </div>
         </div>
 
-        <!-- Masonry Grid Container -->
-        <div id="masonry-grid" class="folders-grid">
-            <!-- Columns injected by JS -->
+        <div class="search-container">
+          <button id="search-toggle" class="search-btn" title="Switch Engine">
+            <img
+              src="https://www.google.com/favicon.ico"
+              id="search-icon"
+              alt="Engine"
+            />
+          </button>
+          <input
+            type="text"
+            id="search-input"
+            placeholder="Search Google..."
+            autocomplete="off"
+          />
         </div>
+      </div>
+
+      <!-- Masonry Grid Container -->
+      <div id="masonry-grid" class="folders-grid">
+        <!-- Columns injected by JS -->
+      </div>
     </main>
 
     <script src="script.js"></script>
-</body>
-
+  </body>
 </html>
