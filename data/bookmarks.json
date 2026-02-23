@@ -1,168 +1,247 @@
 {
-    "일반": [
+    "_layout": {
+        "top": [
+            "일반",
+            "회사",
+            "자료 조사",
+            "취미",
+            "레퍼런스",
+            "AI"
+        ],
+        "bottom": [
+            "부트캠프"
+        ]
+    },
+    "_visibility": {
+        "일반": true,
+        "회사": true,
+        "자료 조사": true,
+        "취미": true,
+        "레퍼런스": true,
+        "AI": true,
+        "부트캠프": true
+    },
+    "_clocks": [
         {
-            "name": "구글",
-            "url": "https://www.google.com/"
+            "name": "SEOUL",
+            "zone": "Asia/Seoul"
         },
         {
+            "name": "BERLIN",
+            "zone": "Europe/Berlin"
+        },
+        {
+            "name": "CHENNAI",
+            "zone": "Asia/Kolkata"
+        },
+        {
+            "name": "MONTERREY",
+            "zone": "America/Mexico_City"
+        }
+    ],
+    "_bgUrl": "https://image.tving.com/upload/cms/caim/CAIM0400/M000370808.jpg",
+    "일반": [
+        {
             "name": "Youtube",
-            "url": "https://www.youtube.com/"
+            "url": "https://www.youtube.com/",
+            "iconUrl": "https://www.google.com/s2/favicons?sz=64&domain=www.youtube.com"
+        },
+        {
+            "name": "구글",
+            "url": "https://www.google.com/",
+            "iconUrl": "https://www.google.com/s2/favicons?sz=64&domain=www.google.com"
         },
         {
             "name": "네이버",
-            "url": "https://www.naver.com/"
+            "url": "https://www.naver.com/",
+            "iconUrl": "https://www.google.com/s2/favicons?sz=64&domain=www.naver.com"
         },
         {
             "name": "노션",
-            "url": "https://www.notion.so/"
+            "url": "https://www.notion.so/",
+            "iconUrl": "https://www.google.com/s2/favicons?sz=64&domain=www.notion.so"
         },
         {
             "name": "깃허브",
-            "url": "https://github.com/kinkos1234/"
+            "url": "https://github.com/kinkos1234/",
+            "iconUrl": "https://www.google.com/s2/favicons?sz=64&domain=github.com"
         },
         {
-            "name": "Comad.J Blog",
-            "url": "https://kinkos1234.github.io/"
+            "name": "Comad.J",
+            "url": "https://kinkos1234.github.io/",
+            "iconUrl": ""
         },
         {
             "name": "구글 애널리틱스",
-            "url": "https://analytics.google.com/analytics/"
+            "url": "https://analytics.google.com/analytics/",
+            "iconUrl": "https://www.google.com/s2/favicons?sz=64&domain=analytics.google.com"
         }
     ],
     "회사": [
         {
             "name": "인트라넷",
-            "url": "http://desk.samsong.co.kr/"
+            "url": "http://desk.samsong.co.kr/",
+            "iconUrl": ""
         },
         {
             "name": "타용도",
-            "url": "http://etc.samsong.com/"
+            "url": "http://etc.samsong.com/",
+            "iconUrl": ""
         },
         {
             "name": "SAP",
-            "url": "https://service.ariba.com/Supplier.aw/109541027/aw?awh=r&awssk=r525oqa5"
+            "url": "https://service.ariba.com/Supplier.aw/109541027/aw?awh=r&awssk=r525oqa5",
+            "iconUrl": "https://www.google.com/s2/favicons?sz=64&domain=service.ariba.com"
         },
         {
             "name": "Covisint",
-            "url": "https://support.portal.covisint.com/web/portal/home"
+            "url": "https://support.portal.covisint.com/web/portal/home",
+            "iconUrl": "https://www.google.com/s2/favicons?sz=64&domain=support.portal.covisint.com"
         }
     ],
-    "자동차 자료 조사": [
+    "자료 조사": [
         {
             "name": "Global Auto News",
-            "url": "http://www.global-autonews.com/home.php"
+            "url": "http://www.global-autonews.com/home.php",
+            "iconUrl": ""
         },
         {
             "name": "MARKLINES",
-            "url": "https://www.marklines.com/en/global/top"
+            "url": "https://www.marklines.com/en/global/top",
+            "iconUrl": "https://www.google.com/s2/favicons?sz=64&domain=www.marklines.com"
         },
         {
             "name": "Focus 2 Move",
-            "url": "https://www.focus2move.com/category/market-researches/"
+            "url": "https://www.focus2move.com/category/market-researches/",
+            "iconUrl": "https://www.google.com/s2/favicons?sz=64&domain=www.focus2move.com"
         },
         {
             "name": "OICA",
-            "url": "https://oica.net/production-statistics/"
+            "url": "https://oica.net/production-statistics/",
+            "iconUrl": "https://www.google.com/s2/favicons?sz=64&domain=oica.net"
         }
     ],
     "취미": [
         {
             "name": "Soop",
-            "url": "https://my.afreecatv.com/favorite"
+            "url": "https://my.afreecatv.com/favorite",
+            "iconUrl": "https://www.google.com/s2/favicons?sz=64&domain=my.afreecatv.com"
         },
         {
             "name": "Soop_Dev",
-            "url": "https://developers.sooplive.co.kr"
+            "url": "https://developers.sooplive.co.kr",
+            "iconUrl": "https://www.google.com/s2/favicons?sz=64&domain=developers.sooplive.co.kr"
         },
         {
             "name": "FMK",
-            "url": "https://www.fmkorea.com/starcraft"
+            "url": "https://www.fmkorea.com/starcraft",
+            "iconUrl": "https://www.google.com/s2/favicons?sz=64&domain=www.fmkorea.com"
         },
         {
             "name": "ONE K",
-            "url": "https://kuniv.kr/"
+            "url": "https://kuniv.kr/",
+            "iconUrl": "https://www.google.com/s2/favicons?sz=64&domain=kuniv.kr"
         },
         {
             "name": "ELO Board",
-            "url": "https://www.eloboard.com/women/bbs/board.php?bo_table=rank_list"
+            "url": "https://www.eloboard.com/women/bbs/board.php?bo_table=rank_list",
+            "iconUrl": ""
         }
     ],
-    "디자인": [
+    "레퍼런스": [
         {
             "name": "CFC",
-            "url": "https://contentformcontext.com/"
+            "url": "https://contentformcontext.com/",
+            "iconUrl": "https://www.google.com/s2/favicons?sz=64&domain=contentformcontext.com"
         },
         {
             "name": "Plus-Ex",
-            "url": "https://www.plus-ex.com/experience"
+            "url": "https://www.plus-ex.com/experience",
+            "iconUrl": "https://www.google.com/s2/favicons?sz=64&domain=www.plus-ex.com"
         },
         {
             "name": "Saworl",
-            "url": "https://saworl.com/new/?page_id=2587"
+            "url": "https://saworl.com/new/?page_id=2587",
+            "iconUrl": ""
         },
         {
             "name": "BRENDEN",
-            "url": "https://brenden.kr/project"
+            "url": "https://brenden.kr/project",
+            "iconUrl": "https://www.google.com/s2/favicons?sz=64&domain=brenden.kr"
         }
     ],
     "AI": [
         {
             "name": "ChatGPT",
-            "url": "https://chatgpt.com/"
+            "url": "https://chatgpt.com/",
+            "iconUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/ChatGPT-Logo.svg/960px-ChatGPT-Logo.svg.png"
         },
         {
             "name": "GEMINI",
-            "url": "https://gemini.google.com/app"
+            "url": "https://gemini.google.com/app",
+            "iconUrl": "https://www.google.com/s2/favicons?sz=64&domain=gemini.google.com"
         },
         {
             "name": "Claude",
-            "url": "https://claude.ai/new"
+            "url": "https://claude.ai/new",
+            "iconUrl": "https://www.google.com/s2/favicons?sz=64&domain=claude.ai"
         },
         {
             "name": "LibreChat",
-            "url": "https://kdt-librechat.goorm.io/c/new"
+            "url": "https://kdt-librechat.goorm.io/c/new",
+            "iconUrl": "https://avatars.githubusercontent.com/u/169401942?s=200&v=4"
         },
         {
             "name": "SUNO",
-            "url": "https://suno.com/"
+            "url": "https://suno.com/",
+            "iconUrl": "https://www.google.com/s2/favicons?sz=64&domain=suno.com"
         },
         {
             "name": "NotebookLM",
-            "url": "https://notebooklm.google.com/"
+            "url": "https://notebooklm.google.com/",
+            "iconUrl": "https://www.google.com/s2/favicons?sz=64&domain=notebooklm.google.com"
         }
     ],
     "부트캠프": [
         {
             "name": "EXP",
-            "url": "https://exp.goorm.io/education/org_TcbkQFviBcogT1joUp/dashboard"
+            "url": "https://exp.goorm.io/education/org_TcbkQFviBcogT1joUp/dashboard",
+            "iconUrl": "https://www.google.com/s2/favicons?sz=64&domain=k-digital.goorm.io"
         },
         {
             "name": "ZOOM",
-            "url": "https://zoom.us/j/95793759086?pwd=IB6RiRQEAUyEgsQM8kvoba50ArbOGj.1#success"
+            "url": "https://zoom.us/j/95793759086?pwd=IB6RiRQEAUyEgsQM8kvoba50ArbOGj.1#success",
+            "iconUrl": "https://www.google.com/s2/favicons?sz=64&domain=zoom.us"
         },
         {
             "name": "LMS",
-            "url": "https://k-digital.goorm.io/learn/my"
+            "url": "https://k-digital.goorm.io/learn/my",
+            "iconUrl": "https://www.google.com/s2/favicons?sz=64&domain=k-digital.goorm.io"
         },
         {
             "name": "Notion_10",
-            "url": "https://www.notion.so/goormkdx/10-2bdc0ff4ce3180c19cbae5dd5c63560f"
+            "url": "https://www.notion.so/goormkdx/10-2bdc0ff4ce3180c19cbae5dd5c63560f",
+            "iconUrl": "https://www.google.com/s2/favicons?sz=64&domain=www.notion.so"
         },
         {
             "name": "Notion_Log",
-            "url": "https://www.notion.so/goormkdx/2d9c0ff4ce318113bf43d1387341f10d"
+            "url": "https://www.notion.so/goormkdx/2d9c0ff4ce318113bf43d1387341f10d",
+            "iconUrl": "https://www.google.com/s2/favicons?sz=64&domain=www.notion.so"
         },
         {
             "name": "Notion_Team",
-            "url": "https://www.notion.so/goormkdx/2-2dac0ff4ce3180f08183d90a81c43587"
+            "url": "https://www.notion.so/goormkdx/2-2dac0ff4ce3180f08183d90a81c43587",
+            "iconUrl": "https://www.google.com/s2/favicons?sz=64&domain=www.notion.so"
         },
         {
             "name": "Notion_Facilitator",
-            "url": "https://tristankim.notion.site/9oormthon-10th"
+            "url": "https://tristankim.notion.site/9oormthon-10th",
+            "iconUrl": "https://www.google.com/s2/favicons?sz=64&domain=www.notion.so"
         },
         {
             "name": "Khan",
-            "url": "https://ko.khanacademy.org/"
+            "url": "https://ko.khanacademy.org/",
+            "iconUrl": "https://www.google.com/s2/favicons?sz=64&domain=ko.khanacademy.org"
         }
     ]
 }

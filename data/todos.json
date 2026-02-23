@@ -1,0 +1,70 @@
+{
+  "todos": {
+    "2026-02-15": [
+      {
+        "text": "",
+        "checked": false
+      },
+      {
+        "text": "",
+        "checked": false
+      },
+      {
+        "text": "",
+        "checked": false
+      },
+      {
+        "text": "",
+        "checked": false
+      },
+      {
+        "text": "",
+        "checked": false
+      }
+    ],
+    "2026-05-25": [
+      {
+        "text": "",
+        "checked": false
+      },
+      {
+        "text": "",
+        "checked": false
+      },
+      {
+        "text": "",
+        "checked": false
+      },
+      {
+        "text": "",
+        "checked": false
+      },
+      {
+        "text": "",
+        "checked": false
+      }
+    ],
+    "2026-02-22": [
+      {
+        "text": "asdf",
+        "checked": false
+      },
+      {
+        "text": "asdf",
+        "checked": false
+      },
+      {
+        "text": "ddd",
+        "checked": true
+      },
+      {
+        "text": "asdfasd",
+        "checked": false
+      },
+      {
+        "text": "asdf",
+        "checked": true
+      }
+    ]
+  }
+}
