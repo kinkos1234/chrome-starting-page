@@ -1,1 +1,14 @@
-data/bookmarks.json\ndata/notes.json\nserver.log\nserver.error.log
+# Personal data
+data/bookmarks.json
+data/notes.json
+data/todos.json
+
+# Logs
+server.log
+server.error.log
+
+# OS
+.DS_Store
+
+# Dependencies
+node_modules/
