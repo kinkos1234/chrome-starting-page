@@ -1,10 +1,5 @@
 // script.js - Premium Crystal Office v2.0 (Dynamic Bookmark Management)
 
-const forcedGlassBoxes = ["타용도", "Global Auto News", "ELO Board"];
-
-// Custom Icon Mappings (Removed based on standard Google Favicon API)
-const customIcons = {};
-
 let currentEngine = "google";
 let currentBookmarkData = null;
 let calendarTodos = {};
@@ -155,7 +150,7 @@ async function initDashboard() {
     // 기본 레이아웃 (Fallback) 및 동적 레이아웃 처리 함수
     const layout = bookmarkData._layout || { top: [], bottom: [] };
     const allCategories = Object.keys(bookmarkData).filter(
-      (k) => k !== "_layout",
+      (k) => !k.startsWith("_"),
     );
 
     let topCategories = layout.top || [];
@@ -230,7 +225,7 @@ async function initDashboard() {
     bottomSection.appendChild(calendar);
     animIndex++;
 
-    setupNotepads();
+    setupNotepads(savedNotes);
 
     setTimeout(() => {
       const cards = document.querySelectorAll(".card-common");
@@ -359,13 +354,31 @@ function createCalendarElement() {
     });
 
     title.appendChild(navDiv);
-    
+
+    const rightGroup = document.createElement("div");
+    rightGroup.style.display = "flex";
+    rightGroup.style.alignItems = "center";
+    rightGroup.style.gap = "8px";
+
+    if (year !== now.getFullYear() || month !== now.getMonth()) {
+      const todayBtn = document.createElement("span");
+      todayBtn.textContent = "Today";
+      todayBtn.style.cssText = "font-size:0.7rem; opacity:0.6; cursor:pointer; padding:2px 8px; border:1px solid rgba(255,255,255,0.15); border-radius:4px;";
+      todayBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        renderCalendar(now.getFullYear(), now.getMonth());
+      });
+      rightGroup.appendChild(todayBtn);
+    }
+
     const yearSpan = document.createElement("span");
     yearSpan.style.fontSize = "0.8rem";
     yearSpan.style.fontWeight = "400";
     yearSpan.style.opacity = "0.6";
     yearSpan.textContent = year;
-    title.appendChild(yearSpan);
+    rightGroup.appendChild(yearSpan);
+
+    title.appendChild(rightGroup);
 
     cal.appendChild(title);
 
@@ -475,6 +488,12 @@ document.addEventListener("DOMContentLoaded", () => {
     if(todosCloseBtn) todosCloseBtn.addEventListener("click", closeTodos);
     if(todosCancelBtn) todosCancelBtn.addEventListener("click", closeTodos);
 
+    // Close todos modal on backdrop click
+    const todosOverlay = document.getElementById("todos-overlay");
+    if(todosOverlay) todosOverlay.addEventListener("click", (e) => {
+        if (e.target === e.currentTarget) closeTodos();
+    });
+
     const todosSaveBtn = document.getElementById("todos-save");
     if(todosSaveBtn) {
         todosSaveBtn.addEventListener("click", async () => {
@@ -490,7 +509,11 @@ document.addEventListener("DOMContentLoaded", () => {
                newTodos.push({ text: txt, checked: chk });
             });
 
-            calendarTodos[currentTodoDateStr] = newTodos;
+            if (hasAnyText) {
+                calendarTodos[currentTodoDateStr] = newTodos;
+            } else {
+                delete calendarTodos[currentTodoDateStr];
+            }
 
             try {
                 await fetch("/api/todos", {
@@ -511,6 +534,19 @@ document.addEventListener("DOMContentLoaded", () => {
             closeTodos();
         });
     }
+
+    // ESC key closes any open modal
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+            const settingsOverlay = document.getElementById("settings-overlay");
+            const todosOverlay = document.getElementById("todos-overlay");
+            if (todosOverlay && !todosOverlay.classList.contains("hidden")) {
+                closeTodos();
+            } else if (settingsOverlay && !settingsOverlay.classList.contains("hidden")) {
+                closeSettings();
+            }
+        }
+    });
 });
 
 function setupGlassBox(container, name) {
@@ -519,24 +555,16 @@ function setupGlassBox(container, name) {
   container.innerHTML = `<span style="font-weight: 600; font-size: 1.2rem; opacity: 0.8; color: white;">${name.charAt(0)}</span>`;
 }
 
-async function setupNotepads() {
+function setupNotepads(notes) {
   const memos = document.querySelectorAll(".memo-item");
-  try {
-    const res = await fetch("/api/notes");
-    if (res.ok) {
-      const data = await res.json();
-      const notes = data.notes || [];
+  notes = notes || [];
 
-      memos.forEach((memo, index) => {
-        if (notes[index]) {
-          memo.textContent = notes[index];
-          resizeMemoFont(memo);
-        }
-      });
+  memos.forEach((memo, index) => {
+    if (notes[index]) {
+      memo.textContent = notes[index];
+      resizeMemoFont(memo);
     }
-  } catch (e) {
-    console.error("Failed to load notes", e);
-  }
+  });
 
   let timeout;
   const saveNotes = () => {
@@ -618,7 +646,7 @@ function renderSettingsForm(data) {
   body.innerHTML = "";
 
   let layout = data._layout || { top: [], bottom: [] };
-  const allCategories = Object.keys(data).filter((k) => k !== "_layout");
+  const allCategories = Object.keys(data).filter((k) => !k.startsWith("_"));
 
   if (
     (!layout.top || layout.top.length === 0) &&

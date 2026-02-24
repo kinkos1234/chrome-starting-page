@@ -3,6 +3,7 @@ const fs = require('fs');
 const path = require('path');
 
 const PORT = 1111;
+const MAX_BODY_SIZE = 1 * 1024 * 1024; // 1MB
 
 const MIME_TYPES = {
     '.html': 'text/html',
@@ -14,6 +15,24 @@ const MIME_TYPES = {
     '.svg': 'image/svg+xml',
     '.json': 'application/json'
 };
+
+function readBody(req, res, callback) {
+    let body = '';
+    let size = 0;
+    req.on('data', chunk => {
+        size += chunk.length;
+        if (size > MAX_BODY_SIZE) {
+            res.writeHead(413, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ error: 'Request body too large' }));
+            req.destroy();
+            return;
+        }
+        body += chunk.toString();
+    });
+    req.on('end', () => {
+        if (!res.writableEnded) callback(body);
+    });
+}
 
 const server = http.createServer((req, res) => {
     // API: Bookmarks
@@ -53,11 +72,7 @@ const server = http.createServer((req, res) => {
     }
 
     if (req.url === '/api/bookmarks' && req.method === 'POST') {
-        let body = '';
-        req.on('data', chunk => {
-            body += chunk.toString();
-        });
-        req.on('end', () => {
+        readBody(req, res, (body) => {
             try {
                 const parsed = JSON.parse(body);
                 if (typeof parsed !== 'object' || parsed === null || Array.isArray(parsed)) {
@@ -108,13 +123,8 @@ const server = http.createServer((req, res) => {
         }
 
         if (req.method === 'POST') {
-            let body = '';
-            req.on('data', chunk => {
-                body += chunk.toString();
-            });
-            req.on('end', () => {
+            readBody(req, res, (body) => {
                 try {
-                    // Start validation
                     const parsed = JSON.parse(body);
                     if (!parsed || !Array.isArray(parsed.notes)) {
                          throw new Error('Invalid data format');
@@ -164,11 +174,7 @@ const server = http.createServer((req, res) => {
         }
 
         if (req.method === 'POST') {
-            let body = '';
-            req.on('data', chunk => {
-                body += chunk.toString();
-            });
-            req.on('end', () => {
+            readBody(req, res, (body) => {
                 try {
                     const parsed = JSON.parse(body);
                     if (!parsed || typeof parsed.todos !== 'object') {
@@ -196,9 +202,16 @@ const server = http.createServer((req, res) => {
     }
 
     // Static File Serving
-    let filePath = '.' + req.url;
-    if (filePath === './') {
-        filePath = './index.html';
+    let filePath = path.join(__dirname, req.url);
+    const resolved = path.resolve(filePath);
+    if (!resolved.startsWith(__dirname)) {
+        res.writeHead(403, { 'Content-Type': 'text/html' });
+        res.end('<h1>403 Forbidden</h1>', 'utf-8');
+        return;
+    }
+
+    if (resolved === __dirname || resolved === __dirname + path.sep) {
+        filePath = path.join(__dirname, 'index.html');
     }
 
     const extname = String(path.extname(filePath)).toLowerCase();
