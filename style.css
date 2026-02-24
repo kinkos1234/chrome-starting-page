@@ -478,6 +478,73 @@ body {
   box-shadow: 0 0 4px rgba(255, 183, 77, 0.8);
 }
 
+/* D-day indicator on calendar cell */
+.calendar-cell.has-dday {
+  border-color: rgba(130, 230, 180, 0.55);
+  box-shadow: 0 0 6px rgba(130, 230, 180, 0.25);
+}
+
+.calendar-cell.has-dday.today {
+  border-color: rgba(130, 230, 180, 0.7);
+  box-shadow: 0 2px 8px rgba(100, 160, 255, 0.4), 0 0 6px rgba(130, 230, 180, 0.3);
+}
+
+/* D-day list below calendar */
+.dday-list {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.dday-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 3px 6px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.dday-item.dday-past {
+  opacity: 0.4;
+}
+
+.dday-item.dday-today {
+  background: rgba(130, 230, 180, 0.1);
+}
+
+.dday-count {
+  font-weight: 700;
+  font-size: 0.7rem;
+  min-width: 42px;
+  color: rgba(130, 230, 180, 0.95);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.dday-label {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dday-date-text {
+  font-size: 0.65rem;
+  opacity: 0.5;
+  white-space: nowrap;
+}
+
+/* D-day modal date input */
+.dday-modal-date {
+  width: 140px;
+  flex: none !important;
+  color-scheme: dark;
+}
+
 /* Specific narrow modal for Todos */
 .settings-modal.todos-modal-narrow {
   width: 460px;

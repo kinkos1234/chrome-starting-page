@@ -3,6 +3,9 @@
 let currentEngine = "google";
 let currentBookmarkData = null;
 let calendarTodos = {};
+let calendarDdays = [];
+let calendarRenderFn = null;
+let calendarDisplayYear, calendarDisplayMonth;
 
 document.addEventListener("DOMContentLoaded", () => {
   initClock();
@@ -120,6 +123,7 @@ async function initDashboard() {
       if (todosRes && todosRes.ok) {
         const tdata = await todosRes.json();
         if (tdata.todos) calendarTodos = tdata.todos;
+        if (tdata.ddays) calendarDdays = tdata.ddays;
       }
     } catch(e) {}
 
@@ -317,6 +321,8 @@ function createCalendarElement() {
 
   function renderCalendar(year, month) {
     cal.innerHTML = "";
+    calendarDisplayYear = year;
+    calendarDisplayMonth = month;
 
     const title = document.createElement("div");
     title.className = "card-title";
@@ -371,6 +377,16 @@ function createCalendarElement() {
       rightGroup.appendChild(todayBtn);
     }
 
+    const addDdayBtn = document.createElement("span");
+    addDdayBtn.textContent = "+";
+    addDdayBtn.style.cssText = "font-size:0.8rem; opacity:0.6; cursor:pointer; padding:1px 6px; border:1px solid rgba(255,255,255,0.15); border-radius:4px; line-height:1;";
+    addDdayBtn.title = "D-day 관리";
+    addDdayBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      openDdayModal();
+    });
+    rightGroup.appendChild(addDdayBtn);
+
     const yearSpan = document.createElement("span");
     yearSpan.style.fontSize = "0.8rem";
     yearSpan.style.fontWeight = "400";
@@ -422,15 +438,58 @@ function createCalendarElement() {
          }
       }
 
+      if (calendarDdays.some(d => d.date === dateString)) {
+        dayEl.classList.add("has-dday");
+      }
+
       dayEl.addEventListener("click", () => openTodosModal(year, month, i, dayEl, dateString));
 
       grid.appendChild(dayEl);
     }
 
     cal.appendChild(grid);
+
+    // D-day list below calendar
+    if (calendarDdays.length > 0) {
+      const ddaySection = document.createElement("div");
+      ddaySection.className = "dday-list";
+
+      const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+      const sorted = [...calendarDdays]
+        .map(d => ({ ...d, _date: new Date(d.date + "T00:00:00") }))
+        .sort((a, b) => a._date - b._date);
+
+      sorted.forEach(dd => {
+        const diff = Math.round((dd._date - today) / (1000 * 60 * 60 * 24));
+        const countText = diff > 0 ? `D-${diff}` : diff === 0 ? "D-Day" : `D+${Math.abs(diff)}`;
+
+        const item = document.createElement("div");
+        item.className = "dday-item" + (diff < 0 ? " dday-past" : diff === 0 ? " dday-today" : "");
+
+        const count = document.createElement("span");
+        count.className = "dday-count";
+        count.textContent = countText;
+
+        const label = document.createElement("span");
+        label.className = "dday-label";
+        label.textContent = dd.label;
+
+        const dateText = document.createElement("span");
+        dateText.className = "dday-date-text";
+        dateText.textContent = `${dd._date.getMonth() + 1}.${String(dd._date.getDate()).padStart(2, '0')}`;
+
+        item.appendChild(count);
+        item.appendChild(label);
+        item.appendChild(dateText);
+        ddaySection.appendChild(item);
+      });
+
+      cal.appendChild(ddaySection);
+    }
   }
 
   renderCalendar(currentYear, currentMonth);
+  calendarRenderFn = renderCalendar;
   return cal;
 }
 
@@ -480,6 +539,59 @@ function openTodosModal(year, month, day, dayEl, dateString) {
   document.getElementById("todos-overlay").classList.remove("hidden");
 }
 
+function openDdayModal() {
+  const body = document.getElementById("dday-body");
+  body.innerHTML = "";
+
+  const list = document.createElement("div");
+  list.className = "dday-modal-list";
+
+  calendarDdays.forEach((dday) => {
+    list.appendChild(createDdayRow(dday.date, dday.label));
+  });
+
+  body.appendChild(list);
+
+  const addBtn = document.createElement("button");
+  addBtn.className = "settings-add-bookmark-btn";
+  addBtn.textContent = "+ Add D-day";
+  addBtn.addEventListener("click", () => {
+    list.appendChild(createDdayRow("", ""));
+    const lastRow = list.lastChild;
+    lastRow.querySelector(".dday-modal-date").focus();
+  });
+  body.appendChild(addBtn);
+
+  document.getElementById("dday-overlay").classList.remove("hidden");
+}
+
+function createDdayRow(date, label) {
+  const row = document.createElement("div");
+  row.className = "todo-row";
+
+  const dateInput = document.createElement("input");
+  dateInput.type = "date";
+  dateInput.className = "todo-input dday-modal-date";
+  dateInput.value = date;
+
+  const labelInput = document.createElement("input");
+  labelInput.type = "text";
+  labelInput.className = "todo-input dday-modal-label";
+  labelInput.placeholder = "제목";
+  labelInput.value = label;
+  labelInput.style.flex = "1";
+
+  const deleteBtn = document.createElement("button");
+  deleteBtn.className = "settings-delete-btn";
+  deleteBtn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>`;
+  deleteBtn.addEventListener("click", () => row.remove());
+
+  row.appendChild(dateInput);
+  row.appendChild(labelInput);
+  row.appendChild(deleteBtn);
+  return row;
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     // Todo Modal Actions
     const closeTodos = () => document.getElementById("todos-overlay").classList.add("hidden");
@@ -519,9 +631,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 await fetch("/api/todos", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ todos: calendarTodos })
+                    body: JSON.stringify({ todos: calendarTodos, ddays: calendarDdays })
                 });
-                
+
                 if (hasAnyText && currentTodoDayEl) {
                     currentTodoDayEl.classList.add("has-todo");
                 } else if (currentTodoDayEl) {
@@ -535,12 +647,58 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    // D-day Modal Actions
+    const closeDday = () => document.getElementById("dday-overlay").classList.add("hidden");
+    const ddayCloseBtn = document.getElementById("dday-close");
+    const ddayCancelBtn = document.getElementById("dday-cancel");
+    if (ddayCloseBtn) ddayCloseBtn.addEventListener("click", closeDday);
+    if (ddayCancelBtn) ddayCancelBtn.addEventListener("click", closeDday);
+
+    const ddayOverlay = document.getElementById("dday-overlay");
+    if (ddayOverlay) ddayOverlay.addEventListener("click", (e) => {
+        if (e.target === e.currentTarget) closeDday();
+    });
+
+    const ddaySaveBtn = document.getElementById("dday-save");
+    if (ddaySaveBtn) {
+        ddaySaveBtn.addEventListener("click", async () => {
+            const rows = document.querySelectorAll("#dday-body .todo-row");
+            const newDdays = [];
+            rows.forEach(row => {
+                const date = row.querySelector(".dday-modal-date").value;
+                const label = row.querySelector(".dday-modal-label").value.trim();
+                if (date && label) {
+                    newDdays.push({ date, label });
+                }
+            });
+            calendarDdays = newDdays;
+
+            try {
+                await fetch("/api/todos", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ todos: calendarTodos, ddays: calendarDdays })
+                });
+                if (calendarRenderFn) {
+                    calendarRenderFn(calendarDisplayYear, calendarDisplayMonth);
+                }
+            } catch (e) {
+                console.error("Failed to save ddays", e);
+            }
+
+            closeDday();
+        });
+    }
+
     // ESC key closes any open modal
     document.addEventListener("keydown", (e) => {
         if (e.key === "Escape") {
+            const ddayOvl = document.getElementById("dday-overlay");
             const settingsOverlay = document.getElementById("settings-overlay");
             const todosOverlay = document.getElementById("todos-overlay");
-            if (todosOverlay && !todosOverlay.classList.contains("hidden")) {
+            if (ddayOvl && !ddayOvl.classList.contains("hidden")) {
+                closeDday();
+            } else if (todosOverlay && !todosOverlay.classList.contains("hidden")) {
                 closeTodos();
             } else if (settingsOverlay && !settingsOverlay.classList.contains("hidden")) {
                 closeSettings();
