@@ -4,6 +4,16 @@
 자주 사용하는 웹사이트들을 용도에 맞게 분류해두고 세계 시간, 달력, 간단한 메모 기능을 함께 이용할 수 있습니다.
 사용자 개인의 PC 구동 환경에 맞춰 로컬 서버를 동작시키는 방식을 채택하여 민감한 개인 북마크나 메모 기록이 외부 서버로 유출될 우려가 없습니다.
 
+## 미리보기
+
+| 대시보드 메인 화면 | 북마크 설정 |
+|:---:|:---:|
+| ![대시보드](docs/screenshots/dashboard.png) | ![설정](docs/screenshots/settings.png) |
+
+| D-day 관리 | 날짜별 할 일(Todo) |
+|:---:|:---:|
+| ![D-day](docs/screenshots/dday.png) | ![Todo](docs/screenshots/todo.png) |
+
 ## 주요 기능
 
 - 반투명한 글래스모피즘(Glassmorphism) 기반의 깔끔한 디자인 인터페이스

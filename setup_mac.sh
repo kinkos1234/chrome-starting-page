@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# setup_mac.sh - Dynamic setup for JH Kim's Office (macOS)
+# setup_mac.sh - Dynamic setup for My Starting Page (macOS)
 # This script automatically detects paths and configures the LaunchAgent.
 
 PROJECT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
@@ -13,7 +13,7 @@ if [ -z "$NODE_PATH" ]; then
     exit 1
 fi
 
-echo "Setting up JH Kim's Office on macOS..."
+echo "Setting up My Starting Page on macOS..."
 echo "Project Directory: $PROJECT_DIR"
 echo "Node Binary: $NODE_PATH"
 

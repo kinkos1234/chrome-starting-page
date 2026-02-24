@@ -2,7 +2,7 @@
 set "SCRIPT_PATH=%~dp0run_server_background.vbs"
 set "STARTUP_FOLDER=%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup"
 
-echo Setting up JH Kim's Office for Windows...
+echo Setting up My Starting Page for Windows...
 echo Core files: index.html, style.css, script.js, server.js
 echo.
 
