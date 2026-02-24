@@ -1288,6 +1288,21 @@ function createBookmarkRow(name, url, iconUrl = "") {
   iconInput.value = iconUrl;
   iconInput.style.flex = "1";
 
+  // Auto-fill favicon when URL is entered and icon field is empty
+  urlInput.addEventListener("blur", () => {
+    const enteredUrl = urlInput.value.trim();
+    if (enteredUrl && !iconInput.value.trim()) {
+      try {
+        const domain = new URL(
+          enteredUrl.startsWith("http") ? enteredUrl : "https://" + enteredUrl
+        ).hostname;
+        iconInput.value = `https://www.google.com/s2/favicons?sz=64&domain=${domain}`;
+      } catch (e) {
+        // Invalid URL, skip auto-fill
+      }
+    }
+  });
+
   const moveUpBtn = document.createElement("button");
   moveUpBtn.className = "settings-action-btn";
   moveUpBtn.title = "Move Up";
