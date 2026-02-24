@@ -1,5 +1,4 @@
 @echo off
-setlocal enabledelayedexpansion
 set "SCRIPT_PATH=%~dp0run_server_background.vbs"
 set "STARTUP_FOLDER=%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup"
 
@@ -9,26 +8,9 @@ echo.
 
 :: Check for Node.js
 node -v >nul 2>&1
-if !errorlevel! neq 0 (
+if %errorlevel% neq 0 (
     echo Error: Node.js is not installed or not in your PATH.
-    
-    :: Check if winget is available
-    winget --version >nul 2>&1
-    if !errorlevel! equ 0 (
-        echo [자동 설치 시도] Windows 기본 패키지 관리자(winget)를 사용해 Node.js LTS 버전을 설치합니다...
-        winget install --id OpenJS.NodeJS.LTS -e --source winget
-        
-        if !errorlevel! equ 0 (
-            echo [안내] Node.js 설치가 완료되었습니다. 적용을 위해 이 창을 닫고 setup_windows.bat 를 다시 실행해주세요.
-            pause
-            exit /b
-        )
-    )
-    
-    echo [문제 발생] 자동 설치 기능(winget)을 사용할 수 없거나 설치에 실패했습니다.
-    echo Node.js 공식 홈페이지를 열어드립니다. 
-    echo 창이 열리면 화면 중앙의 "LTS" 버전을 직접 다운로드 및 설치해주세요.
-    start https://nodejs.org
+    echo Please install Node.js from https://nodejs.org
     pause
     exit /b
 )
