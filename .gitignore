@@ -12,3 +12,4 @@ server.error.log
 
 # Dependencies
 node_modules/
+.claude/
